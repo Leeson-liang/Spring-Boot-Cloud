@@ -1,0 +1,25 @@
+
+server:
+  port: 8861
+
+#使用Eureka服务器进行身份验证
+security:
+  basic:
+    enabled: true
+  user:
+    name: 1
+    password: 1
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#      使用Eureka服务器进行身份验证
+      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  application:
+    name: registry-server
